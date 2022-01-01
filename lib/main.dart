@@ -5,8 +5,15 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +23,16 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
             backgroundColor: Colors.blue,
             title: const Text("Message from jesus 🙏🏾")),
-        body: ListView.builder(
-          itemBuilder: (_, index) {
-            return Container(
-              color: randomColor(),
-              width: 500,
-              height: 500,
-              child: const Center(
-                child: Text(
-                  "I eat ass 🍑",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 45
-                  ),
-                ),
-              ),
-            );
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            setState(() {
+              count++;
+            });
           },
+        ),
+        body: Center(
+          child: Text("$count")
         ),
       ),
     );
